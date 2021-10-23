@@ -3,21 +3,25 @@ from typing import ByteString
 from pynput import keyboard
 import socket
 
+##Create Socket
 s= socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 s.bind((socket.gethostname(), 5556))
 s.listen(8)
 Speed =0
 
+##Accept Connections
 while True:
     conn, addr = s.accept()
     print('Connected by', addr)
     conn.send(bytes("Welcome to the Server!","utf-8"))
    
     def on_press(key):  
+        ##Make Speed variable global
         global Speed
+        ## Convert Speed value to PWM
         if str(key) == "'1'" or str(key) == "'2'"  or str(key) == "'3'"  or str(key) == "'4'"  or str(key) == "'5'":  
             Speed = (int(key.char)/5)*(255)
-            
+            ## Output Speed along with arrow key/direction
         elif key == keyboard.Key.up:
             conn.send(bytes("[f"+ str(Speed) +"][f"+ str(Speed) +"][f"+ str(Speed) +"][f"+ str(Speed) +"]","utf-8"))
         elif key == keyboard.Key.left:
