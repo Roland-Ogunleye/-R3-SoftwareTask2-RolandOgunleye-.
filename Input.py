@@ -1,5 +1,3 @@
-from os import supports_effective_ids
-from typing import ByteString
 from pynput import keyboard
 import socket
 
